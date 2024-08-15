@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;    
+            font-family: sans-serif;   
+        }
+        .all{
+            background-color: rgb(237, 172, 50);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            backdrop-filter: rgba(128, 128, 128, 0.696);
+        }
+        .header{
+            display: flex;
+            height: 20vh;
+            width: 80%;
+            justify-content:center;
+            align-items: center;
+        }
+        #logo{
+            height: 100%;
+            width: 35%;
+            margin-left: 400px;
+            margin-top: 50px;
+        }
+        #moving2{
+            height: 18vh;
+            width: 15%;
+        }
+        #select{
+            display: flex;
+            gap: 20px;
+            height: 50px;
+            justify-content: center;
+            align-items: center; 
+        }
+        #type{
+            height: 30px;
+            width: 200px;
+            border-radius: 5px;
+        }
+        #filter{
+            height: 30px;
+            width: 120px;
+            border-radius: 10px;
+            border: 2px solid gray;
+            font-weight: 500;
+            font-size: 15px;
+        }
+        #filter:hover{
+            cursor: pointer;
+        }
+        #search{
+            height: 30px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid gray;
+            padding: 4px;
+            color: black;
+        }
+        #reset{
+            height: 30px;
+            width: 50px;
+            border: 0;
+            border-radius: 100px;
+            border: 1px solid gray;
+            padding: 2px;
+        }
+        #reset:hover{
+            background-color: rgb(63, 118, 244);
+        }
+        #pokemon_card_container{
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding:  50px;
+            padding-left:130px;
+            width: 80%;
+            /* background: linear-gradient(90deg, black ,gray,black); */
+            background-color: rgb(233, 238, 249);
+            border-radius: 25px;
+            margin-inline: auto;
+        }
+
+        .card {
+            height: 300px;
+            width: 200px;
+            perspective: 1000px; /* Perspective for 3D effect */
+            margin: 10px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            border-radius: 50px;
+            border: 0.5px solid rgb(169, 169, 169);
+            box-shadow: -20px 15px 15px 1px rgb(137, 136, 133);
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg); /* Rotate the card on hover */
+            box-shadow: 20px 15px 15px 1px rgb(137, 136, 133);
+            transition: 1s;
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Hide the back face when not flipped */
+            border-radius: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .card-front {
+            background-color: rgba(158, 196, 239, 0.844);
+        }
+
+        .card-back {
+            background-color: rgba(158, 193, 239, 0.468);
+            transform: rotateY(180deg); /* Rotate the back face to hide initially */
+        }
+
+        .image {
+            height: 180px;
+            width: 160px;
+        }
+
+        .backImage {
+            height: 200px;
+            width: 200px;
+        }
+
+        .name {
+            font-size: large;
+            font-weight: 800;
+            color: rgb(4, 86, 45);
+        }
+
+        .types {
+            font-size: large;
+            font-weight: 800;
+            color: rgb(197, 47, 47);
+            margin-top: 10px;
+        }
+
+        .ability {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            height: 50px;
+        }
+
+        .ability-box {
+            color: rgb(36, 104, 163);
+            font-weight: 800;
+        }
+        #pikachu{
+            height: 240px;
+            width: 120px;
+            position: absolute;
+            top: 23px;
+            right: 120px;
+        }
+        #pikachu2{
+            height: 250px;
+            width: 100px;
+            position: absolute;
+            top: 8px;
+            right: 260px;
+        }
+        #pikachu3{
+            height: 250px;
+            width: 100px;
+            position: absolute;
+            top: 13px;
+            left: 280px;
+        }
+        #pikachu4{
+            height: 100px;
+            width: 80px;
+            position: absolute;
+            top: 154px;
+            left: 160px;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <div class="header">
+            <img src="./logo.png" alt="" id="logo">
+            <img src="./n1582649.gif" alt="" id="moving2">
+        </div>
+    
+        <br><br>
+        <div id="select">
+            <select name="type" id="type">
+                <option value="normal">Normal</option>
+                <option value="fire">Fire</option>
+                <option value="bug">Bug</option>
+                <option value="grass">Grass</option>
+                <option value="electric">Electric</option>
+                <option value="water">Water</option>
+                <option value="ghost">Ghost</option>
+                <option value="poison">Poison</option>
+                <option value="fairy">Fairy</option>
+                <option value="fighting">Fighting</option>
+                <option value="psychic">Psychic</option>
+                <option value="rock">Rock</option>
+                <option value="dragon">Dragon</option>
+            </select>
+            <button id="filter">Filter By Type</button>
+            <button id="reset"><a href="index.html"><span class="material-symbols-outlined">autorenew</span></a></button>
+            <input type="text" name="" id="search" placeholder="Search pokemon By Name">
+        </div><br>
+        <img src="./pokey4.png" alt="" id="pikachu">
+        <img src="./pokey6.png" alt="" id="pikachu2">
+        <img src="./pokey5.png" alt="" id="pikachu3">
+        <img src="./pokey3.png" alt="" id="pikachu4">
+        <div id="pokemon_card_container">
+            <!-- Cards will be dynamically generated here -->
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
